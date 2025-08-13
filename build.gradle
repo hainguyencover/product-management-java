@@ -29,6 +29,7 @@ dependencies {
     runtimeOnly group: 'org.apache.taglibs', name: 'taglibs-standard-impl', version: '1.2.5'
     // https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec
     implementation group: 'org.apache.taglibs', name: 'taglibs-standard-spec', version: '1.2.5'
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
