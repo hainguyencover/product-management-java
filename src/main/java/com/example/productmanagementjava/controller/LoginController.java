@@ -50,23 +50,23 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        User authUser = userDAO.findByUsernameAndPassword(username, password);
+        User authUser = userDAO.findByUsernameAndPassword(username, UserDAO.hashPassword(password));
 
         if (authUser != null) {
             request.getSession().setAttribute("user", authUser);
+            System.out.println(">>> LoginController: Đăng nhập thành công cho user: "
+                    + authUser.getUsername() + " với vai trò: " + authUser.getRole());
 
-            // -- DEBUG --
-            System.out.println(">>> LoginController: Đăng nhập thành công cho user: " + authUser.getUsername() + " với vai trò: " + authUser.getRole());
-
-            if ("ADMIN".equals(authUser.getRole())) {
-                // -- DEBUG --
-                System.out.println(">>> LoginController: Chuyển hướng đến /admin/dashboard");
+            if ("ADMIN".equalsIgnoreCase(authUser.getRole())) {
                 response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                return;
             } else {
-                // -- DEBUG --
-                System.out.println(">>> LoginController: Chuyển hướng đến /home");
                 response.sendRedirect(request.getContextPath() + "/home");
+                return;
             }
+        } else {
+            request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
     }
 }

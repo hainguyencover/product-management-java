@@ -21,7 +21,7 @@ public class AuthFilter implements Filter {
         System.out.println(">>> AuthFilter: Đang xử lý đường dẫn: " + path);
 
         // ... (phần code cho phép /login, /css, /js giữ nguyên)
-        if (path.startsWith("/login") || path.startsWith("/css/") || path.startsWith("/js/")) {
+        if (path.startsWith("/login") || path.startsWith("/register") || path.startsWith("/css/") || path.startsWith("/js/")) {
             chain.doFilter(request, response);
             return;
         }
@@ -30,7 +30,8 @@ public class AuthFilter implements Filter {
 
         if (user == null) {
             // -- DEBUG --
-            System.out.println(">>> AuthFilter: CHƯA ĐĂNG NHẬP. Chuyển hướng về /login...");
+            System.out.println(">>> AuthFilter: CHƯA ĐĂNG NHẬP. Chuyển hướng về /l" +
+                    "ogin...");
             ((HttpServletResponse) response).sendRedirect(httpRequest.getContextPath() + "/login");
         } else {
             // -- DEBUG --

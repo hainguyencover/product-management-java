@@ -22,6 +22,11 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                     </form>
+                    <hr>
+                    <div class="text-center">
+                        <span>Chưa có tài khoản?</span>
+                        <a href="${pageContext.request.contextPath}/register" class="btn btn-outline-success w-100 mt-2">Đăng ký</a>
+                    </div>
                 </div>
             </div>
         </div>
